@@ -30,6 +30,22 @@ printOdds(20);
 printOdds();
 printOdds(0);
 
+// Exercise 1 Section
+
+console.log(
+  "EXERCISE 1: Print Odds Continued using Arrow Notation \n==========\n"
+);
+
+const printOdds_arrow = (count) => {
+  if (count > 0) console.log("Count value is Positive: ", count);
+  for (var i = 1; i <= count; i++) {
+    if (i % 2 != 0) {
+      console.log("Positive odd number: ", i);
+    }
+  }
+};
+printOdds(25);
+
 // Exercise 2 Section
 console.log("EXERCISE 2: Legal to Drive? \n==========\n");
 
