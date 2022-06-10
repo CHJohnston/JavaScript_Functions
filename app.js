@@ -4,16 +4,31 @@ console.log("JavaScript Functions");
 console.log("EXERCISE 1: Print Odds Continued \n==========\n");
 
 const printOdds = function (count = 0) {
-  if (count < 0) {
-    count = count * -1;
+  if (count == 0) {
+    console.log("Invalid Number ", count);
+    return;
   }
-  for (var i = 1; i <= count; i++) {
-    if (i % 2 != 0) {
-      console.log("odd number: ", i);
+  if (count > 0) {
+    console.log("Count value is Positive: ", count);
+    for (var i = 1; i <= count; i++) {
+      if (i % 2 != 0) {
+        console.log("Positive odd number: ", i);
+      }
+    }
+  } else {
+    console.log("Count value is Negative: ", count);
+    for (var i = count; i < 0; i++) {
+      if (i % 2 != 0) {
+        console.log("Negative odd number: ", i);
+      }
     }
   }
 };
-printOdds(100);
+
+printOdds(-20);
+printOdds(20);
+printOdds();
+printOdds(0);
 
 // Exercise 2 Section
 console.log("EXERCISE 2: Legal to Drive? \n==========\n");
@@ -44,7 +59,7 @@ function findQuadrant(x = false, y = false) {
   }
 
   if (x == 0 && y == 0) {
-    console.log(coordinateString + " is at the Center");
+    console.log(coordinateString + " is at the Origin");
     return;
   }
 
@@ -76,6 +91,10 @@ function findQuadrant(x = false, y = false) {
 }
 
 findQuadrant(2, -4);
+findQuadrant(0, 0);
+findQuadrant(1, 2);
+findQuadrant(-6, 18);
+findQuadrant(-4, -4);
 
 // Exercise 4 Section
 console.log("EXERCISE 4: What type of triangle??? \n==========\n");
@@ -83,7 +102,10 @@ console.log("EXERCISE 4: What type of triangle??? \n==========\n");
 function triangleType(x = 0, y = 0, z = 0) {
   triangleSidesMsg = `Sides ${x},${y},${z}`;
 
-  if (x + y <= z || x === 0 || y === 0 || z === 0) {
+  if (x === 0 || y === 0 || z === 0) {
+    return triangleSidesMsg + " are not a valid Triangle";
+  }
+  if (x + y <= z || x + z <= y || y + z <= x) {
     return triangleSidesMsg + " are not a valid Triangle";
   }
   if (x == y && x == z && y == z) {
@@ -96,9 +118,13 @@ function triangleType(x = 0, y = 0, z = 0) {
     return triangleSidesMsg + " make a scalene triangle";
   }
 }
-
 console.log(triangleType(1, 2, 2));
 console.log(triangleType(1, 1, 2));
+console.log(triangleType(1, 1, 1));
+console.log(triangleType(4, 5, 6));
+console.log(triangleType(0, 0, 0));
+console.log(triangleType(1));
+console.log(triangleType());
 
 // Exercise 5 Section
 console.log("Exercise 5: Data Plan Status\n==========\n");
@@ -121,13 +147,22 @@ function cellUsage(planLimit = 0, day = 0, usage = 0) {
   );
   console.log(`Your Average Daily Use: ${avgDailyUsage} GB/Day`);
   if (avgDailyUsage > planDailyUsage) {
-    let exceededDataUsage = (avgDailyUsage * (30 - day)).toFixed(2);
+    let exceededDataUsage = (
+      (30 - day) * avgDailyUsage +
+      projectedPlanUsage -
+      planLimit
+    ).toFixed(2);
     console.log(
       `You are using Excessive Data, if you continue at your rate, you'll exceed your data plan by ${exceededDataUsage} GB`
     );
   } else {
-    console.log(`You are using less than your Plan's Average Daily limit.`);
+    console.log(
+      `You are using less than or equal to your Plan's Average Daily limit.`
+    );
   }
 }
-
+cellUsage(50, 12, 25);
+cellUsage(100, 15, 56);
 cellUsage(40, 10, 20);
+cellUsage(40, 10, 5);
+cellUsage(30, 10, 10);
